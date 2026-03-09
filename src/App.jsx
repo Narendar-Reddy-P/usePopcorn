@@ -60,6 +60,9 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("watched", JSON.stringify(watched));
   }, [watched]);
+  //writing localStorage updates in useEffect is effective way as it will be updated wheneveer the dependency state changes
+  //without it the code may contain localStorage might contain in multiple areas in code, like while adding movies, removing movie etc..
+
   useEffect(() => {
     const controller = new AbortController();
 
