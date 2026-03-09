@@ -49,12 +49,17 @@ const KEY = "6c06a6c4";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(() => {
+    return JSON.parse(localStorage.getItem("watched")) || [];
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify(watched));
+  }, [watched]);
   useEffect(() => {
     const controller = new AbortController();
 
